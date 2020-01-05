@@ -10,6 +10,8 @@
     padding: 5px;
   }
 </style>
+
+<title>AngularJS</title>
 <body>
 
 
@@ -32,7 +34,7 @@
   function rssFetcher(){
 
       $('p').empty();
-    $.get("https://www.upwork.com/ab/feed/jobs/rss?q=android&sort=recency&paging=0%3B10&api_params=1&securityToken=519d8950bcbd86c334ac8839250c924c46b21218786f0e7f2a9496fe3340553bb68324faa199de639f6ad1173ed658e6add1b7f6171a92293d7068f5c01c81cf&userUid=520706335274606592&orgUid=520706335278800897", function(data) {
+    $.get("https://www.upwork.com/ab/feed/jobs/rss?budget=100-499&verified_payment_only=1&q=angularjs&sort=recency&paging=0%3B10&api_params=1&securityToken=519d8950bcbd86c334ac8839250c924c46b21218786f0e7f2a9496fe3340553bb68324faa199de639f6ad1173ed658e6add1b7f6171a92293d7068f5c01c81cf&userUid=520706335274606592&orgUid=520706335278800897", function(data) {
         var $xml = $(data);
         $xml.find("item").each(function() {
             var $this = $(this),

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+  table,th,td {
+    border : 1px solid black;
+    border-collapse: collapse;
+  }
+  th,td {
+    padding: 5px;
+  }
+</style>
+
+<title>Android</title>
+<body>
+
+
+<button id="rss">  Start the RSS Feed</button>
+
+
+
+<p></p>
+
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script>
+
+  var arr = [];
+
+  var titleOfFirstItemFromFirstObjectInArray = "";
+
+
+
+  function rssFetcher(){
+
+      $('p').empty();
+    $.get("https://www.upwork.com/ab/feed/jobs/rss?budget=100-499%2C500-999%2C1000-4999%2C5000-&verified_payment_only=1&q=laravel&sort=recency&paging=0%3B10&api_params=1&securityToken=519d8950bcbd86c334ac8839250c924c46b21218786f0e7f2a9496fe3340553bb68324faa199de639f6ad1173ed658e6add1b7f6171a92293d7068f5c01c81cf&userUid=520706335274606592&orgUid=520706335278800897", function(data) {
+        var $xml = $(data);
+        $xml.find("item").each(function() {
+            var $this = $(this),
+                item = {
+                    title: $this.find("title").text(),
+                    link: $this.find("link").text(),
+                };
+               arr.push(item);
+
+            $('p').append('<a href="'+item.link+'">'+item.title+'</a><br><br>');
+        });
+
+        console.log(arr);
+
+
+    });
+
+    if(titleOfFirstItemFromFirstObjectInArray !== arr[0].title){
+
+        new Audio('http://www.realmofdarkness.net/audio/vg/sf/sf2/perfect.mp3').play()
+    }
+
+    titleOfFirstItemFromFirstObjectInArray = arr[0].title;
+      arr = [];
+
+  }
+
+
+  $('#rss').click(function () {
+      $('#rss').hide();
+      setInterval(rssFetcher, 60000);
+  });
+
+
+
+</script>
+
+</body>
+</html>
